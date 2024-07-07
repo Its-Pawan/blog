@@ -8,8 +8,8 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 
 // importing models
-import Auth from './models/auth.js'
-import Blog from './models/blog.js'
+import Auth from './models/auth.js';
+import Blog from './models/blog.js';
 
 // Set up multer for file uploads 
 const upload = multer({ storage: multer.memoryStorage() });
