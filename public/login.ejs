@@ -1,0 +1,103 @@
+<%- include('./layout/header') -%>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Centering the form vertically and horizontally */
+        body,
+        html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            /* Background color */
+        }
+
+        /* Container for the login form */
+        .login-container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            /* Form background color */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Optional: Box shadow for a subtle lift */
+        }
+
+        /* Form styles */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            /* Form title color */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #555;
+            /* Label color */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            /* Input border color */
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            /* Button background color */
+            color: white;
+            /* Button text color */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Button hover color */
+        }
+    </style>
+    
+    <div class="login-container">
+        <% if(typeof msg !=='undefined' ){ %> 
+            <p style="color: red; padding: 5px 15px; text-align: center;">
+                <%= msg %>
+            </p>
+            <% } %>
+        <form action="/login" method="POST" class="login-form">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+       
+
+    </div>
+    <%- include('./layout/footer') -%>

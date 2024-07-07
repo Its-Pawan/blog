@@ -1,0 +1,15 @@
+<%- include('./layout/header') -%>
+<% if(locals.data && data.length !==0){ %>
+    
+    <form action="/update-data/<%= data._id  %>" method="post" enctype="multipart/form-data" class="form">
+        Title: <input type="text" name="title" required value="<%=data.title %>">
+        Content: <textarea type="text" name="content" required><%= data.content  %></textarea>
+        Description: <textarea type="text" name="desc"  required><%= data.description  %></textarea>
+        Image: <input type="file" name="image">
+        <input type="submit">
+    </form>
+    <% }else{ %>
+        <h3>Oops, No data found</h3>
+        <% } %>
+        
+        <%- include('./layout/footer') -%>

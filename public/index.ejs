@@ -1,0 +1,74 @@
+<%- include('./layout/header') -%>
+
+    <div class="logout">
+        <a href="/logout">Logout</a>
+    </div>
+    <form action="/submit" method="post" enctype="multipart/form-data" class="form">
+        Title: <input type="text" name="title" required>
+        Content: <textarea type="text" name="content" required></textarea>
+        Description: <textarea type="text" name="desc" required></textarea>
+        Image: <input type="file" name="image" accept="image/*" required>
+        <input type="submit">
+    </form>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px;
+        }
+    </style>
+    <br>
+    <br>
+    <br>
+    <% if(locals.data && data.length !==0){ %>
+        <table>
+            <thead>
+                <th>Item ID</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Description</th>
+                <th>Publish Date</th>
+                <th>Image</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <% data.forEach(element=> {%>
+                    <tr>
+
+                        <td>
+                            <%= element._id %>
+                        </td>
+                        <td>
+                            <%= element.title %>
+                        </td>
+                        <td>
+                            <%= element.content %>
+                        </td>
+                        <td>
+                            <%= element.description %>
+                        </td>
+                        <td>
+                            <%= element.publishDate %>
+                        </td>
+                        <td>
+                            <% if (element.image && element.image.data) { %>
+                                <img src="data:<%= element.image.contentType %>;base64,<%= element.image.data.toString('base64') %>"
+                                    alt="Blog Image" width="200">
+                                <% } %>
+                        </td>
+                        <td>
+                            <a href="/delete/<%= element._id %>">Delete</a>
+                            <a href="/update/<%= element._id %>">Update</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+
+        </table>
+
+        <% }else{ %>
+            <h1>No data yet</h1>
+            <% } %>
+                <%- include('./layout/footer') -%>
