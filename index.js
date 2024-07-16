@@ -227,10 +227,10 @@ app.get("/api/data", async (req, res) => {
 
 
 app.get('/api/data/:id', async (req, res) => {
-    const title = req.params.id;
+    const url = req.params.id;
 
     try {
-        const data = await Blog.findOne({ title }).lean();
+        const data = await Blog.findOne({ url }).lean();
         if (!data) {
             return res.status(404).json({ error: 'Blog not found' });
         }
