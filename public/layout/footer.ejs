@@ -1,3 +1,11 @@
+<script>
+    const deletePost = (id) => {
+        const result = confirm("Do you really want to delete this post")
+        if(result){
+            window.location = '/delete/' + id
+        }
+    }
+</script>
 </body>
 
 </html>

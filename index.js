@@ -18,6 +18,7 @@ const blogSchema = new mongoose.Schema({
     title: String,
     content: String,
     description: String,
+    url: String,
     image: {
         data: Buffer,
         contentType: String
@@ -102,7 +103,7 @@ app.get('/', checkAuth, async (req, res) => {
     }
 });
 
-app.get('/login', async (req, res) => { 
+app.get('/login', async (req, res) => {
     res.render('login', { msg: req.query.msg });
 });
 
@@ -141,6 +142,7 @@ app.post('/submit', upload.single('image'), async (req, res) => {
     let title = req.body.title
     let content = req.body.content
     let desc = req.body.desc
+
     let img = req.file ? {
         data: req.file.buffer,
         contentType: req.file.mimetype
@@ -150,7 +152,8 @@ app.post('/submit', upload.single('image'), async (req, res) => {
         title: title,
         content: content,
         description: desc,
-        image: img
+        image: img,
+        url: title.replace(/\s+/g, '-').toLowerCase()
     })
     try {
         await newBlog.save();
@@ -195,7 +198,8 @@ app.post('/update-data/:id', upload.single('image'), async (req, res) => {
         title: title,
         content: content,
         description: desc,
-        image: img
+        image: img,
+        url: title.replace(/\s+/g, '-').toLowerCase()
     }
     try {
         await Blog.findByIdAndUpdate(id, updatedBlog)
@@ -212,7 +216,7 @@ app.get("/api/data", async (req, res) => {
         const articles = await Blog.find().lean();
         articles.forEach(article => {
             if (article.image && article.image.data instanceof Buffer) {
-                article.image.data = article.image.data.toString('base64');
+                article.image.data = article.image.data.toString('base64'); 
             }
         });
         res.json(articles);

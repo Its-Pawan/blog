@@ -27,6 +27,7 @@
             <thead>
                 <th>Item ID</th>
                 <th>Title</th>
+                <th>URL</th>
                 <th>Content</th>
                 <th>Description</th>
                 <th>Publish Date</th>
@@ -44,6 +45,9 @@
                             <%= element.title %>
                         </td>
                         <td>
+                            <%= element.url %>
+                        </td>
+                        <td>
                             <%= element.content %>
                         </td>
                         <td>
@@ -59,9 +63,11 @@
                                 <% } %>
                         </td>
                         <td>
-                            <a href="/delete/<%= element._id %>">Delete</a>
+                            <button onclick="deletePost('<%= element._id %>')">Delete</button>
+                            <!-- <a href="/delete/<%= element._id %>">Delete</a> -->
                             <a href="/update/<%= element._id %>">Update</a>
                         </td>
+                       
                     </tr>
                     <% }); %>
             </tbody>
